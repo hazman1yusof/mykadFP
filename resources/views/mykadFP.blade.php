@@ -8,7 +8,7 @@
 
 @endsection
 
-@section('title', 'Emergency Department')
+@section('title', 'Mykad and Fingerprint reader')
 
 @section('content')
 <div class="ui center aligned grid">
@@ -17,7 +17,7 @@
     <div class="ui teal segment">
     	<form class="ui form">
     		<div class="ui rounded small image">
-			  <img src="{{ asset('img/no-image.gif') }}">
+			  <img src="{{ asset('img/no-image.gif') }}" id="image">
 			</div>
 
 		  <h4 class="ui dividing header">Biodata</h4>
