@@ -16,9 +16,27 @@
 	<div class="ten wide column">
     <div class="ui teal segment">
     	<form class="ui form">
-    		<div class="ui rounded small image bordered">
-			  <img src="{{ asset('img/no-image.gif') }}" id="image">
-			</div>
+
+    		<div class="ui three column grid">
+    			<div class="column" style="position:relative;">
+		    		<div class="ui rounded tiny image" style="position:absolute;bottom: 16px;">
+					  <img src="{{ asset('img/fingerprint.png') }}" id="leftfp">
+					</div>
+				</div>
+
+				<div class="column">
+		    		<div class="ui rounded small image bordered">
+					  <img src="{{ asset('img/no-image.gif') }}" id="image">
+					</div>
+				</div>
+
+    			<div class="column" style="position:relative;">
+		    		<div class="ui rounded tiny image" style="position:absolute;bottom: 16px;">
+					  <img src="{{ asset('img/fingerprint.png') }}" id="rightfp">
+					</div>
+				</div>
+    		</div>
+
 
 		  <h4 class="ui dividing header">Biodata</h4>
 
