@@ -26,11 +26,11 @@
 		    <div class="two fields">
 		      <div class="field">
 		    	<label>Full Name</label>
-		        <input type="text" name="name" placeholder="Full Name">
+		        <input type="text" readonly name="name" placeholder="Full Name">
 		      </div>
 		      <div class="field">
 		    	<label>MyKad Number</label>
-		        <input type="text" name="icnum" placeholder="MyKad Number">
+		        <input type="text" readonly name="icnum" placeholder="MyKad Number">
 		      </div>
 		    </div>
 		  </div>
@@ -39,15 +39,15 @@
 		    <div class="three fields">
 		      <div class="field">
 		    	<label>Gender</label>
-		        <input type="text" name="gender" placeholder="Gender">
+		        <input type="text" readonly name="gender" placeholder="Gender">
 		      </div>
 		      <div class="field">
 		    	<label>Date Of Birth</label>
-		        <input type="text" name="dob" placeholder="Date Of Birth">
+		        <input type="text" readonly name="dob" placeholder="Date Of Birth">
 		      </div>
 		      <div class="field">
 		    	<label>Birth Place</label>
-		        <input type="text" name="birthplace" placeholder="Birth Place">
+		        <input type="text" readonly name="birthplace" placeholder="Birth Place">
 		      </div>
 		    </div>
 		  </div>
@@ -56,15 +56,15 @@
 		    <div class="three fields">
 		      <div class="field">
 		    	<label>Race</label>
-		        <input type="text" name="race" placeholder="Race">
+		        <input type="text" readonly name="race" placeholder="Race">
 		      </div>
 		      <div class="field">
 		    	<label>Citizenship</label>
-		        <input type="text" name="citizenship" placeholder="Citizenship">
+		        <input type="text" readonly name="citizenship" placeholder="Citizenship">
 		      </div>
 		      <div class="field">
 		    	<label>Religion</label>
-		        <input type="text" name="religion" placeholder="Religion">
+		        <input type="text" readonly name="religion" placeholder="Religion">
 		      </div>
 		    </div>
 		  </div>
@@ -73,30 +73,30 @@
 		  <div class="field">
 		    <div class="inline fields">
 		      <div class="eleven wide field">
-		        <input type="text" name="address1" placeholder="Address 1">
+		        <input type="text" readonly name="address1" placeholder="Address 1">
 		      </div>
 		      <div class="five wide field"><label>City</label>
-		        <input type="text" name="city" placeholder="City">
+		        <input type="text" readonly name="city" placeholder="City">
 		      </div>
 		    </div>
 	      </div>
 		  <div class="field">
 		    <div class="inline fields">
 		      <div class="eleven wide field">
-		        <input type="text" name="address2" placeholder="Address 2">
+		        <input type="text" readonly name="address2" placeholder="Address 2">
 		      </div>
 		      <div class="five wide field"><label>State</label>
-		        <input type="text" name="state" placeholder="State">
+		        <input type="text" readonly name="state" placeholder="State">
 		      </div>
 		    </div>
 	      </div>
 		  <div class="field">
 		    <div class="inline fields">
 		      <div class="eleven wide field">
-		        <input type="text" name="address3" placeholder="Address 3">
+		        <input type="text" readonly name="address3" placeholder="Address 3">
 		      </div>
 		      <div class="five wide field"><label>Postcode</label>
-		        <input type="text" name="postcode" placeholder="Postcode">
+		        <input type="text" readonly name="postcode" placeholder="Postcode">
 		      </div>
 		    </div>
 	      </div>
