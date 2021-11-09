@@ -2,7 +2,14 @@
 $(document).ready(function () {
 
 	$('#readmykad').click(function(){
-		alert('reading my kad');
+
+		$('.ui.basic.modal#read').modal({closable: false,transition:{
+		    showMethod   : 'fade',
+		    showDuration : 200,
+		    hideMethod   : 'fade',
+		    hideDuration : -1,}
+		}).modal('show');
+
 		$.get( "http://localhost:2020/BioPakWeb/v2/readMyKad?EnablePhoto=true&ShowSplash=false&PhotoOnly=false&ValidateCard=false")
 		  .done(function( data ) {
 		  	var ret = data.Data;
@@ -23,6 +30,23 @@ $(document).ready(function () {
 		    $("img#image").attr('src','data:image/png;base64,'+ret.Picture);
 		    $("img#leftfp").attr('src','data:image/jpeg;base64,'+ret.LeftFinger);
 		    $("img#rightfp").attr('src','data:image/jpeg;base64,'+ret.RightFinger);
+		    $('.ui.basic.modal#read').modal('hide');
+		    $('.ui.basic.modal#success').modal('show');
+
+			delay(function(){
+		    	$('.ui.basic.modal#success').modal('hide');
+			}, 1000 );
+
+		}).fail(function() {
+		    $('.ui.basic.modal#read').modal('hide');
+		    $('.ui.basic.modal#fail').modal('show');
+
+		    delay(function(){
+		    	$('.ui.basic.modal#fail').modal('hide');
+			}, 1000 );
+
+  		}).always(function() {
+		  	// modal.modal('hide');
 		});
 	});
 
@@ -39,3 +63,11 @@ $(document).ready(function () {
 		
 	});
 });
+
+var delay = (function(){
+	var timer = 0;
+	return function(callback, ms){
+		clearTimeout (timer);
+		timer = setTimeout(callback, ms);
+	};
+})();

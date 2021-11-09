@@ -17,26 +17,11 @@
     <div class="ui teal segment">
     	<form class="ui form">
 
-    		<div class="ui three column grid">
-    			<div class="column" style="position:relative;">
-		    		<div class="ui rounded tiny image" style="position:absolute;bottom: 16px;">
-					  <img src="{{ asset('img/fingerprint.png') }}" id="leftfp">
-					</div>
+			<div class="column">
+	    		<div class="ui rounded small image bordered">
+				  <img src="{{ asset('img/no-image.gif') }}" id="image">
 				</div>
-
-				<div class="column">
-		    		<div class="ui rounded small image bordered">
-					  <img src="{{ asset('img/no-image.gif') }}" id="image">
-					</div>
-				</div>
-
-    			<div class="column" style="position:relative;">
-		    		<div class="ui rounded tiny image" style="position:absolute;bottom: 16px;">
-					  <img src="{{ asset('img/fingerprint.png') }}" id="rightfp">
-					</div>
-				</div>
-    		</div>
-
+			</div>
 
 		  <h4 class="ui dividing header">Biodata</h4>
 
@@ -131,7 +116,27 @@
 	</div>
 	</div>
 
+
+	<div class="ui basic modal" id="read">
+	  <div class="ui icon header">
+	    <i class="yellow exclamation triangle icon"></i>Reading My card, Please Wait ...
+	  </div>
+	</div>
+
+	<div class="ui basic modal" id="success">
+	  <div class="ui icon header">
+	    <i class="green check icon"></i></i>Read Success
+	  </div>
+	</div>
+
+	<div class="ui basic modal" id="fail">
+	  <div class="ui icon header">
+	    <i class="red times icon"></i></i>Read Fail
+	  </div>
+	</div>
+
 </div>
+
 @endsection
 
 @section('scripts')
