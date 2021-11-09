@@ -16,7 +16,7 @@
 	<div class="ten wide column">
     <div class="ui teal segment">
     	<form class="ui form">
-    		<div class="ui rounded small image">
+    		<div class="ui rounded small image bordered">
 			  <img src="{{ asset('img/no-image.gif') }}" id="image">
 			</div>
 

@@ -20,7 +20,7 @@ $(document).ready(function () {
 		    $("input[name='city']").val(ret.City);
 		    $("input[name='state']").val(ret.State);
 		    $("input[name='postcode']").val(ret.Postcode);
-		    $("img#image").attr('src',ret.Picture);
+		    $("img#image").attr('src','data:image/png;base64,'+ret.Picture);
 		});
 	});
 
