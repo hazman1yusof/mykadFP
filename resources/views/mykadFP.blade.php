@@ -12,6 +12,7 @@
 
 @section('content')
 <div class="ui center aligned grid">
+    <input id="_token" name="_token" value="{{ csrf_token() }}" type="hidden">
 	<div class="row">
 	<div class="ten wide column">
     <div class="ui teal segment">
@@ -131,7 +132,7 @@
 
 	<div class="ui basic modal" id="fail">
 	  <div class="ui icon header">
-	    <i class="red times icon"></i></i>Read Fail
+	    <i class="red times icon"></i></i>Read Fail <span id="failmsg"></span>
 	  </div>
 	</div>
 
