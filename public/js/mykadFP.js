@@ -2,13 +2,13 @@
 $(document).ready(function () {
 
 	$('#readmykad').click(function(){
-		$("span#failmsg,span#succmsg").text("")
+		chg_msg('read','Processing.. Please Wait..');
 
 		$('.ui.basic.modal#read').modal({closable: false,transition:{
 		    showMethod   : 'fade',
 		    showDuration : 200,
 		    hideMethod   : 'fade',
-		    hideDuration : -1,}
+		    hideDuration : 200,}
 		}).modal('show');
 
 		$.get( "http://localhost:2020/BioPakWeb/v2/readMyKad?EnablePhoto=true&ShowSplash=false&PhotoOnly=false&ValidateCard=false")
@@ -16,16 +16,12 @@ $(document).ready(function () {
 		  	var msg = data.StatusMessage;
 		  	var StatusCode = data.StatusCode;
 		  	if(StatusCode!="0"){
-		    	$('.ui.basic.modal#read').modal('hide');
-		    	$("span#failmsg").text(msg)
-		    	delay(function(){
-			    	$('.ui.basic.modal#fail').modal('show');
-				}, 300 );
-			 //    delay(function(){
-			 //    	$('.ui.basic.modal#fail').modal('hide');
-				// }, 3000 );
+		  		chg_msg('fail',msg);
+
+				delay(function(){
+		  			$('.ui.basic.modal#read').modal('hide');
+				}, 1000 );
 		  	}else{
-		    	$("span#succmsg").text(msg)
 		  		
 		  		var ret = data.Data;
 			    $("input[name='name']").val(ret.GMPCName);
@@ -70,27 +66,51 @@ $(document).ready(function () {
 	                $('#overlay').fadeOut();
 	            });
 
-	            $('.ui.basic.modal#read').modal('hide');
-			    $('.ui.basic.modal#success').modal('show');
-
-				delay(function(){
-			    	$('.ui.basic.modal#success').modal('hide');
-				}, 1500 );
+	            scanthumb();
 		  	}
 		  	
 
 		}).fail(function() {
-		    $('.ui.basic.modal#read').modal('hide');
-		    $('.ui.basic.modal#fail').modal('show');
+	  		chg_msg('fail', "Service not installed");
+	  		
+			delay(function(){
+	  			$('.ui.basic.modal#read').modal('hide');
+			}, 1000 );
 
-		    delay(function(){
-		    	$('.ui.basic.modal#fail').modal('hide');
-			}, 1500 );
-
-  		}).always(function() {
-		  	// modal.modal('hide');
-		});
+  		});
 	});
+
+	function scanthumb(){
+		chg_msg('read',"Please put thumbprint into biometric scanner");
+
+		$.get( "http://localhost:2020/BioPakWeb/v2/matchMyKadFP?Timeout=10&FFDLevel=2&ShowSplash=false&Bitmap=false&Template=false")
+		  .done(function( data ) {
+		  	var msg = data.StatusMessage;
+		  	var StatusCode = data.StatusCode;
+		  	if(StatusCode != "0"){
+		  		chg_msg('fail',msg);
+
+				delay(function(){
+		  			$('.ui.basic.modal#read').modal('hide');
+				}, 1000 );
+		  	}else{
+		    	$("span#succmsg").text(msg)
+
+				delay(function(){
+			    	$('.ui.basic.modal#success').modal('hide');
+				}, 1000 );
+		  	}
+
+		}).fail(function() {
+	  		chg_msg('fail', "Service not installed");
+	  		
+			delay(function(){
+	  			$('.ui.basic.modal#read').modal('hide');
+			}, 1000 );
+
+  		});
+
+	}
 
 	$('#matchfp').click(function(){
 		$("span#failmsg,span#succmsg").text("")
@@ -137,14 +157,25 @@ $(document).ready(function () {
 		});
 	});
 
-	$('#patlist').click(function(){
+	function chg_msg(state,msg){
+		if(state == 'fail'){
+			$('i.green,i.yellow').hide();
+			$('i.red').fadeIn();
 
-		
-	});
-	$('#readmykid').click(function(){
+			$('span#msg').text('Fail - '+msg);
+		}else if(state == 'success'){
+			$('i.red,i.yellow').hide();
+			$('i.green').fadeIn();
 
-		
-	});
+			$('span#msg').text('Success - '+msg);
+		}else{
+			$('i.red,i.green').hide();
+			$('i.yellow').fadeIn();
+
+			$('span#msg').text(msg);
+		}
+	}
+
 });
 
 var delay = (function(){

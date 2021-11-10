@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/','HomeController@index');
+Route::get('/getpatlist','HomeController@getpatlist');
 
 Route::post('/store','HomeController@store');

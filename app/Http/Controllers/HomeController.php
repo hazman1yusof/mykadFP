@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use stdClass;
 
 class HomeController extends Controller
 {   
@@ -43,5 +44,17 @@ class HomeController extends Controller
 
             file_put_contents('C:\cmas\mykad\mykadfp\myphotov1.jpg', $data);
         }
+    }
+
+    public function getpatlist(Request $request){
+        $responce = new stdClass();
+
+        $responce->data = [];
+        $pat_mast = DB::table('mykadfp.pat_mast')
+                    ->select('mrn','newic','fptemplate','lastuser')
+                    ->get();
+
+        $responce->data = $pat_mast;
+        return json_encode($pat_mast);
     }
 }

@@ -111,30 +111,28 @@
     </div>
 	</div>
 	</div>
-	<div class="row">
-	<div class="ten wide column">
-    <div class="ui teal segment"></div>
-	</div>
-	</div>
 
 
 	<div class="ui basic modal" id="read">
 	  <div class="ui icon header">
-	    <i class="yellow exclamation triangle icon"></i>Processing.. Please Wait..
+	    <i class="red times icon" style="display:none"></i>
+	  	<i class="green check icon" style="display:none"></i>
+	    <i class="yellow exclamation triangle icon" style="display:none"></i>
+	    <span id="msg">Processing.. Please Wait..</span>
 	  </div>
 	</div>
-
+<!-- 
 	<div class="ui basic modal" id="success">
 	  <div class="ui icon header">
-	    <i class="green check icon"></i></i>Success : <span id="succmsg"></span>
+	    <i class="green check icon"></i>Success : <span id="succmsg"></span>
 	  </div>
 	</div>
 
 	<div class="ui basic modal" id="fail">
 	  <div class="ui icon header">
-	    <i class="red times icon"></i></i>Fail : <span id="failmsg"></span>
+	    <i class="red times icon"></i>Fail : <span id="failmsg"></span>
 	  </div>
-	</div>
+	</div> -->
 
 </div>
 
