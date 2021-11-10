@@ -81,9 +81,9 @@ $(document).ready(function () {
 	});
 
 	function scanthumb(){
-		chg_msg('read',"Please put thumbprint into biometric scanner");
+		chg_msg('fp',"Put thumbprint <br> into biometric scanner");
 
-		$.get( "http://localhost:2020/BioPakWeb/v2/matchMyKadFP?Timeout=10&FFDLevel=2&ShowSplash=false&Bitmap=false&Template=false")
+		$.get( "http://localhost:2020/BioPakWeb/v2/matchMyKadFP?Timeout=10&FFDLevel=2&ShowSplash=false&Bitmap=true&Template=false")
 		  .done(function( data ) {
 		  	var msg = data.StatusMessage;
 		  	var StatusCode = data.StatusCode;
@@ -94,10 +94,12 @@ $(document).ready(function () {
 		  			$('.ui.basic.modal#read').modal('hide');
 				}, 1000 );
 		  	}else{
-		    	$("span#succmsg").text(msg)
+			    $("img#fingerprint").attr('src','data:image/jpeg;base64,'+data.Data.Bitmap);
+
+				chg_msg('success',"Success - "+msg);
 
 				delay(function(){
-			    	$('.ui.basic.modal#success').modal('hide');
+		  			$('.ui.basic.modal#read').modal('hide');
 				}, 1000 );
 		  	}
 
@@ -112,67 +114,49 @@ $(document).ready(function () {
 
 	}
 
-	$('#matchfp').click(function(){
-		$("span#failmsg,span#succmsg").text("")
+	function PrintElem(elem){
+	    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
-		$('.ui.basic.modal#read').modal({closable: false,transition:{
-		    showMethod   : 'fade',
-		    showDuration : 200,
-		    hideMethod   : 'fade',
-		    hideDuration : -1,}
-		}).modal('show');
+	    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+	    mywindow.document.write('</head><body >');
+	    mywindow.document.write('<h1>' + document.title  + '</h1>');
+	    mywindow.document.write(document.getElementById(elem).innerHTML);
+	    mywindow.document.write('</body></html>');
 
-		$.get( "http://localhost:2020/BioPakWeb/v2/matchMyKadFP?Timeout=10&FFDLevel=2&ShowSplash=false&Bitmap=false&Template=false")
-		  .done(function( data ) {
-		  	var msg = data.StatusMessage;
-		  	var StatusCode = data.StatusCode;
-		  	if(StatusCode != "0"){
-		    	$('.ui.basic.modal#read').modal('hide');
-		    	$("span#failmsg").text(msg)
-		    	delay(function(){
-			    	$('.ui.basic.modal#fail').modal('show');
-				}, 300 );
-		  	}else{
+	    mywindow.document.close(); // necessary for IE >= 10
+	    mywindow.focus(); // necessary for IE >= 10*/
 
-		    	$("span#succmsg").text(msg)
+	    mywindow.print();
+	    mywindow.close();
 
-	            $('.ui.basic.modal#read').modal('hide');
-			    $('.ui.basic.modal#success').modal('show');
+	    return true;
+	}
 
-				delay(function(){
-			    	$('.ui.basic.modal#success').modal('hide');
-				}, 1500 );
-		  	}
-
-		}).fail(function() {
-		    $('.ui.basic.modal#read').modal('hide');
-		    $('.ui.basic.modal#fail').modal('show');
-
-		    delay(function(){
-		    	$('.ui.basic.modal#fail').modal('hide');
-			}, 1500 );
-
-  		}).always(function() {
-		  	// modal.modal('hide');
-		});
-	});
+	$('#download').click(function(){
+		$("form#myform").printThis();
+	})
 
 	function chg_msg(state,msg){
 		if(state == 'fail'){
-			$('i.green,i.yellow').hide();
+			$('i.green,i.yellow,i.violet').hide();
 			$('i.red').fadeIn();
 
-			$('span#msg').text('Fail - '+msg);
+			$('span#msg').html(msg);
 		}else if(state == 'success'){
-			$('i.red,i.yellow').hide();
+			$('i.red,i.yellow,i.violet').hide();
 			$('i.green').fadeIn();
 
-			$('span#msg').text('Success - '+msg);
+			$('span#msg').html(msg);
+		}else if(state == 'fp'){
+			$('i.red,i.yellow,i.green').hide();
+			$('i.violet').fadeIn();
+
+			$('span#msg').html(msg);
 		}else{
-			$('i.red,i.green').hide();
+			$('i.red,i.green,i.violet').hide();
 			$('i.yellow').fadeIn();
 
-			$('span#msg').text(msg);
+			$('span#msg').html(msg);
 		}
 	}
 

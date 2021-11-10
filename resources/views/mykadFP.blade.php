@@ -8,21 +8,33 @@
 
 @endsection
 
-@section('title', 'Mykad and Fingerprint reader')
+@section('title', 'Biometric Scanner')
 
 @section('content')
 <div class="ui center aligned grid">
 	<div class="row">
 	<div class="ten wide column">
     <div class="ui teal segment">
-    	<form class="ui form">
 
-    		<input id="_token" name="_token" value="{{ csrf_token() }}" type="hidden">
+    	<input id="_token" name="_token" value="{{ csrf_token() }}" type="hidden">
+    	<form class="ui form" id="myform">
+
+    	<div class="ui three column grid">
+    		
+			<div class="column"></div>
 			<div class="column">
 	    		<div class="ui rounded small image bordered">
 				  <img src="{{ asset('img/no-image.gif') }}" id="image">
 				</div>
 			</div>
+			<div class="column" style="position: relative">
+	    		<div class="ui rounded tiny image" style="position: absolute; top: 42px; left: 22px;">
+				  <img src="{{ asset('img/fingerprint.png') }}" id="fingerprint">
+				</div>
+			</div>
+
+    	</div>
+
 
 		  <h4 class="ui dividing header">Biodata</h4>
 
@@ -115,6 +127,7 @@
 
 	<div class="ui basic modal" id="read">
 	  <div class="ui icon header">
+	  	<i class="violet fingerprint icon" style="display:none"></i>
 	    <i class="red times icon" style="display:none"></i>
 	  	<i class="green check icon" style="display:none"></i>
 	    <i class="yellow exclamation triangle icon" style="display:none"></i>
@@ -139,5 +152,6 @@
 @endsection
 
 @section('scripts')
+		<script src="{{asset('asset/printthis/printThis.js')}}"></script>
 		<script src="{{asset('js/mykadFP.js')}}"></script>
 @endsection
