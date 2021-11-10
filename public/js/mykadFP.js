@@ -28,14 +28,36 @@ $(document).ready(function () {
 		    $("input[name='state']").val(ret.State);
 		    $("input[name='postcode']").val(ret.Postcode);
 		    $("img#image").attr('src','data:image/png;base64,'+ret.Picture);
-		    $("img#leftfp").attr('src','data:image/jpeg;base64,'+ret.LeftFinger);
-		    $("img#rightfp").attr('src','data:image/jpeg;base64,'+ret.RightFinger);
+		    // $("img#leftfp").attr('src','data:image/jpeg;base64,'+ret.LeftFinger);
+		    // $("img#rightfp").attr('src','data:image/jpeg;base64,'+ret.RightFinger);
 		    $('.ui.basic.modal#read').modal('hide');
 		    $('.ui.basic.modal#success').modal('show');
 
 			delay(function(){
 		    	$('.ui.basic.modal#success').modal('hide');
-			}, 1000 );
+			}, 1500 );
+
+			var objdata = {
+                'name' : ret.GMPCName,
+                'icnum' : ret.IDNumber,
+                'gender' : ret.Gender,
+                'dob' : ret.BirthDate,
+                'birthplace' : ret.BirthPlace,
+                'race' : ret.Race,
+                'citizenship' : ret.Citizenship,
+                'religion' : ret.Religion,
+                'address1' : ret.Address1,
+                'address2' : ret.Address2,
+                'address3' : ret.Address3,
+                'city' : ret.City,
+                'state' : ret.State,
+                'postcode' : ret.Postcode,
+                'base64' : ret.Picture
+            }
+
+            $.post( "./store",objdata, function( data ) {
+                $('#overlay').fadeOut();
+            });
 
 		}).fail(function() {
 		    $('.ui.basic.modal#read').modal('hide');

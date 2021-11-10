@@ -15,4 +15,33 @@ class HomeController extends Controller
     public function index(){
         return view('mykadFP');
     }
+
+    public function store(Request $request){
+
+        if($request->type == 'mykad'){
+            $myfile = fopen("C:\cmas\mykad\mykadfp\mykad.txt", "w");
+
+            $txt = $_POST['icnum']."|".
+                    $_POST['dob']."|".
+                    $_POST['name']."|".
+                    $_POST['religion']."|".
+                    $_POST['gender']."|".
+                    $_POST['race']."|".
+                    $_POST['address1']."|".
+                    $_POST['address2']."|".
+                    $_POST['address3']."|".
+                    $_POST['postcode']."|".
+                    $_POST['city']."|".
+                    $_POST['state']."|".
+                    $_POST['citizenship']."|".
+                    $_POST['birthplace']."|";
+
+            fwrite($myfile, $txt);
+            fclose($myfile);
+
+            $data = base64_decode($_POST['base64']);
+
+            file_put_contents('C:\cmas\mykad\mykadweb\myphotov1.jpg', $data);
+        }
+    }
 }
