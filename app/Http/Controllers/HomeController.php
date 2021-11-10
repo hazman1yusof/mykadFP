@@ -41,7 +41,7 @@ class HomeController extends Controller
 
             $data = base64_decode($_POST['base64']);
 
-            file_put_contents('C:\cmas\mykad\mykadweb\myphotov1.jpg', $data);
+            file_put_contents('C:\cmas\mykad\mykadfp\myphotov1.jpg', $data);
         }
     }
 }

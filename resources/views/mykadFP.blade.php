@@ -12,12 +12,12 @@
 
 @section('content')
 <div class="ui center aligned grid">
-    <input id="_token" name="_token" value="{{ csrf_token() }}" type="hidden">
 	<div class="row">
 	<div class="ten wide column">
     <div class="ui teal segment">
     	<form class="ui form">
 
+    		<input id="_token" name="_token" value="{{ csrf_token() }}" type="hidden">
 			<div class="column">
 	    		<div class="ui rounded small image bordered">
 				  <img src="{{ asset('img/no-image.gif') }}" id="image">

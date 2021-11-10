@@ -16,11 +16,13 @@ $(document).ready(function () {
 		  	var msg = data.StatusMessage;
 		  	if(msg=="No MyKad"){
 		    	$('.ui.basic.modal#read').modal('hide');
-		    	$("span#failmsg").text("msg")
-		    	$('.ui.basic.modal#fail').modal('show');
-			    delay(function(){
-			    	$('.ui.basic.modal#fail').modal('hide');
-				}, 1500 );
+		    	$("span#failmsg").text(msg)
+		    	delay(function(){
+			    	$('.ui.basic.modal#fail').modal('show');
+				}, 300 );
+			 //    delay(function(){
+			 //    	$('.ui.basic.modal#fail').modal('hide');
+				// }, 3000 );
 		  	}else{
 		  		var ret = data.Data;
 			    $("input[name='name']").val(ret.GMPCName);
@@ -48,7 +50,8 @@ $(document).ready(function () {
 				}, 1500 );
 
 				var objdata = {
-					"_token": $("#csrf_token").val(),
+					'type' : 'mykad',
+					'_token': $("input#_token").val(),
 	                'name' : ret.GMPCName,
 	                'icnum' : ret.IDNumber,
 	                'gender' : ret.Gender,
