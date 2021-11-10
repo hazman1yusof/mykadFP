@@ -120,19 +120,19 @@
 
 	<div class="ui basic modal" id="read">
 	  <div class="ui icon header">
-	    <i class="yellow exclamation triangle icon"></i>Reading My card, Please Wait ...
+	    <i class="yellow exclamation triangle icon"></i>Processing.. Please Wait..
 	  </div>
 	</div>
 
 	<div class="ui basic modal" id="success">
 	  <div class="ui icon header">
-	    <i class="green check icon"></i></i>Read Success
+	    <i class="green check icon"></i></i>Success : <span id="succmsg"></span>
 	  </div>
 	</div>
 
 	<div class="ui basic modal" id="fail">
 	  <div class="ui icon header">
-	    <i class="red times icon"></i></i>Read Fail <span id="failmsg"></span>
+	    <i class="red times icon"></i></i>Fail : <span id="failmsg"></span>
 	  </div>
 	</div>
 

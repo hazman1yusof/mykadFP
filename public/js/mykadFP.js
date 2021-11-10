@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
 	$('#readmykad').click(function(){
-		$("span#failmsg").text("")
+		$("span#failmsg,span#succmsg").text("")
 
 		$('.ui.basic.modal#read').modal({closable: false,transition:{
 		    showMethod   : 'fade',
@@ -14,7 +14,8 @@ $(document).ready(function () {
 		$.get( "http://localhost:2020/BioPakWeb/v2/readMyKad?EnablePhoto=true&ShowSplash=false&PhotoOnly=false&ValidateCard=false")
 		  .done(function( data ) {
 		  	var msg = data.StatusMessage;
-		  	if(msg=="No MyKad"){
+		  	var StatusCode = data.StatusCode;
+		  	if(StatusCode!="0"){
 		    	$('.ui.basic.modal#read').modal('hide');
 		    	$("span#failmsg").text(msg)
 		    	delay(function(){
@@ -24,6 +25,8 @@ $(document).ready(function () {
 			 //    	$('.ui.basic.modal#fail').modal('hide');
 				// }, 3000 );
 		  	}else{
+		    	$("span#succmsg").text(msg)
+		  		
 		  		var ret = data.Data;
 			    $("input[name='name']").val(ret.GMPCName);
 			    $("input[name='icnum']").val(ret.IDNumber);
@@ -42,12 +45,6 @@ $(document).ready(function () {
 			    $("img#image").attr('src','data:image/png;base64,'+ret.Picture);
 			    // $("img#leftfp").attr('src','data:image/jpeg;base64,'+ret.LeftFinger);
 			    // $("img#rightfp").attr('src','data:image/jpeg;base64,'+ret.RightFinger);
-			    $('.ui.basic.modal#read').modal('hide');
-			    $('.ui.basic.modal#success').modal('show');
-
-				delay(function(){
-			    	$('.ui.basic.modal#success').modal('hide');
-				}, 1500 );
 
 				var objdata = {
 					'type' : 'mykad',
@@ -72,6 +69,13 @@ $(document).ready(function () {
 	            $.post( "/store",objdata, function( data ) {
 	                $('#overlay').fadeOut();
 	            });
+
+	            $('.ui.basic.modal#read').modal('hide');
+			    $('.ui.basic.modal#success').modal('show');
+
+				delay(function(){
+			    	$('.ui.basic.modal#success').modal('hide');
+				}, 1500 );
 		  	}
 		  	
 
@@ -89,9 +93,50 @@ $(document).ready(function () {
 	});
 
 	$('#matchfp').click(function(){
+		$("span#failmsg,span#succmsg").text("")
 
-		
+		$('.ui.basic.modal#read').modal({closable: false,transition:{
+		    showMethod   : 'fade',
+		    showDuration : 200,
+		    hideMethod   : 'fade',
+		    hideDuration : -1,}
+		}).modal('show');
+
+		$.get( "http://localhost:2020/BioPakWeb/v2/matchMyKadFP?Timeout=10&FFDLevel=2&ShowSplash=false&Bitmap=false&Template=false")
+		  .done(function( data ) {
+		  	var msg = data.StatusMessage;
+		  	var StatusCode = data.StatusCode;
+		  	if(StatusCode != "0"){
+		    	$('.ui.basic.modal#read').modal('hide');
+		    	$("span#failmsg").text(msg)
+		    	delay(function(){
+			    	$('.ui.basic.modal#fail').modal('show');
+				}, 300 );
+		  	}else{
+
+		    	$("span#succmsg").text(msg)
+
+	            $('.ui.basic.modal#read').modal('hide');
+			    $('.ui.basic.modal#success').modal('show');
+
+				delay(function(){
+			    	$('.ui.basic.modal#success').modal('hide');
+				}, 1500 );
+		  	}
+
+		}).fail(function() {
+		    $('.ui.basic.modal#read').modal('hide');
+		    $('.ui.basic.modal#fail').modal('show');
+
+		    delay(function(){
+		    	$('.ui.basic.modal#fail').modal('hide');
+			}, 1500 );
+
+  		}).always(function() {
+		  	// modal.modal('hide');
+		});
 	});
+
 	$('#patlist').click(function(){
 
 		

@@ -8,7 +8,7 @@
       Read Mykad
     </a>
     <a class="item" id="matchfp">
-      Match FP
+      Match FP with MyKad
     </a>
     <a class="item" id="patlist">
       Patient List
